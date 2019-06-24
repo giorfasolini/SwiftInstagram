@@ -19,7 +19,7 @@ extension Instagram {
     /// - parameter failure: The callback called after an incorrect retrieval.
     ///
     /// - important: It requires *public_content* scope.
-    public func location(_ locationId: String, success: SuccessHandler<InstagramLocation<String>>?, failure: FailureHandler?) {
+    public func location(_ locationId: String, success: SuccessHandler<InstagramLocation<String>, String>?, failure: FailureHandler?) {
         request("/locations/\(locationId)", success: success, failure: failure)
     }
 
@@ -35,7 +35,7 @@ extension Instagram {
     public func recentMedia(forLocation locationId: String,
                             maxId: String? = nil,
                             minId: String? = nil,
-                            success: SuccessHandler<[InstagramMedia]>?,
+                            success: SuccessHandler<[InstagramMedia], String>?,
                             failure: FailureHandler?) {
         var parameters = Parameters()
 
@@ -59,7 +59,7 @@ extension Instagram {
                                longitude: Double? = nil,
                                distance: Int? = nil,
                                facebookPlacesId: String? = nil,
-                               success: SuccessHandler<[InstagramLocation<String>]>?,
+                               success: SuccessHandler<[InstagramLocation<String>], String>?,
                                failure: FailureHandler?) {
         var parameters = Parameters()
 
@@ -83,7 +83,7 @@ extension Instagram {
     public func searchLocation(coordinates: CLLocationCoordinate2D? = nil,
                                distance: Int? = nil,
                                facebookPlacesId: String? = nil,
-                               success: SuccessHandler<[InstagramLocation<String>]>?,
+                               success: SuccessHandler<[InstagramLocation<String>], String>?,
                                failure: FailureHandler?) {
         searchLocation(latitude: coordinates?.latitude,
                        longitude: coordinates?.longitude,

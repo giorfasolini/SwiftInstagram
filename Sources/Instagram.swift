@@ -17,7 +17,7 @@ public class Instagram {
     public typealias EmptySuccessHandler = () -> Void
 
     /// Success handler.
-    public typealias SuccessHandler<T> = (_ data: T) -> Void
+    public typealias SuccessHandler<T, String> = (_ data: T, _ nextURL: String) -> Void
 
     /// Failure handler.
     public typealias FailureHandler = (_ error: Error) -> Void
@@ -134,8 +134,10 @@ public class Instagram {
     public func request<T: Decodable>(_ endpoint: String,
                                method: HTTPMethod = .get,
                                parameters: Parameters = [:],
-                               success: SuccessHandler<T>?,
+                               success: SuccessHandler<T, String>?,
                                failure: FailureHandler?) {
+        
+        var paginationNextURL: String = ""
 
         let urlRequest = buildURLRequest(endpoint, method: method, parameters: parameters)
 
@@ -147,9 +149,14 @@ public class Instagram {
                         jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                         let object = try jsonDecoder.decode(InstagramResponse<T>.self, from: data)
 
+                        if let paginationURL = object.pagination?.nextUrl {
+                            print("paginationURL", paginationURL)
+                            paginationNextURL = paginationURL
+                        }
+                        
                         if let data = object.data {
                             DispatchQueue.main.async {
-                                success?(data)
+                                success?(data, paginationNextURL)
                             }
                         } else if let message = object.meta.errorMessage {
                             DispatchQueue.main.async {

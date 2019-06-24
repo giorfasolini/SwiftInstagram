@@ -17,7 +17,7 @@ extension Instagram {
     /// - parameter failure: The callback called after an incorrect retrieval.
     ///
     /// - important: It requires *public_content* scope when getting information about a user other than yours.
-    public func user(_ userId: String, success: SuccessHandler<InstagramUser>?, failure: FailureHandler?) {
+    public func user(_ userId: String, success: SuccessHandler<InstagramUser, String>?, failure: FailureHandler?) {
         request("/users/\(userId)", success: success, failure: failure)
     }
 
@@ -35,7 +35,7 @@ extension Instagram {
                             maxId: String? = nil,
                             minId: String? = nil,
                             count: Int? = nil,
-                            success: SuccessHandler<[InstagramMedia]>?,
+                            success: SuccessHandler<[InstagramMedia], String>?,
                             failure: FailureHandler?) {
         var parameters = Parameters()
 
@@ -54,7 +54,7 @@ extension Instagram {
     /// - parameter failure: The callback called after an incorrect retrieval.
     ///
     /// - important: It requires *public_content* scope.
-    public func userLikedMedia(maxLikeId: String? = nil, count: Int? = nil, success: SuccessHandler<[InstagramMedia]>?, failure: FailureHandler?) {
+    public func userLikedMedia(maxLikeId: String? = nil, count: Int? = nil, success: SuccessHandler<[InstagramMedia], String>?, failure: FailureHandler?) {
         var parameters = Parameters()
 
         parameters["max_like_id"] ??= maxLikeId
@@ -71,7 +71,7 @@ extension Instagram {
     /// - parameter failure: The callback called after an incorrect retrieval.
     ///
     /// - important: It requires *public_content* scope.
-    public func search(user query: String, count: Int? = nil, success: SuccessHandler<[InstagramUser]>?, failure: FailureHandler?) {
+    public func search(user query: String, count: Int? = nil, success: SuccessHandler<[InstagramUser], String>?, failure: FailureHandler?) {
         var parameters = Parameters()
 
         parameters["q"] = query

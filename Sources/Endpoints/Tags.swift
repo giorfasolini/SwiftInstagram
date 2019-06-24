@@ -17,7 +17,7 @@ extension Instagram {
     /// - parameter failure: The callback called after an incorrect retrieval.
     ///
     /// - important: It requires *public_content* scope.
-    public func tag(_ tagName: String, success: SuccessHandler<InstagramTag>?, failure: FailureHandler?) {
+    public func tag(_ tagName: String, success: SuccessHandler<InstagramTag, String>?, failure: FailureHandler?) {
         request("/tags/\(tagName)", success: success, failure: failure)
     }
 
@@ -35,7 +35,7 @@ extension Instagram {
                             maxTagId: String? = nil,
                             minTagId: String? = nil,
                             count: Int? = nil,
-                            success: SuccessHandler<[InstagramMedia]>?,
+                            success: SuccessHandler<[InstagramMedia], String>?,
                             failure: FailureHandler?) {
         var parameters = Parameters()
 
@@ -53,7 +53,7 @@ extension Instagram {
     /// - parameter failure: The callback called after an incorrect retrieval.
     ///
     /// - important: It requires *public_content* scope.
-    public func search(tag query: String, success: SuccessHandler<[InstagramTag]>?, failure: FailureHandler?) {
+    public func search(tag query: String, success: SuccessHandler<[InstagramTag], String>?, failure: FailureHandler?) {
         request("/tags/search", parameters: ["q": query], success: success, failure: failure)
     }
 }
