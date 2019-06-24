@@ -7,6 +7,10 @@
 //
 
 /// The struct containing an Instagram user.
+
+import Foundation
+import UIKit
+
 public struct InstagramUser: Decodable {
 
     // MARK: Properties

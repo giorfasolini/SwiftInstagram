@@ -31,7 +31,7 @@ public class Instagram {
         static let accessTokenKey = "AccessToken"
     }
 
-    enum HTTPMethod: String {
+    public enum HTTPMethod: String {
         case get = "GET", post = "POST", delete = "DELETE"
     }
 
@@ -131,7 +131,7 @@ public class Instagram {
 
     // MARK: Request
 
-    func request<T: Decodable>(_ endpoint: String,
+    public func request<T: Decodable>(_ endpoint: String,
                                method: HTTPMethod = .get,
                                parameters: Parameters = [:],
                                success: SuccessHandler<T>?,
@@ -168,7 +168,7 @@ public class Instagram {
         }.resume()
     }
 
-    private func buildURLRequest(_ endpoint: String, method: HTTPMethod, parameters: Parameters) -> URLRequest {
+    public func buildURLRequest(_ endpoint: String, method: HTTPMethod, parameters: Parameters) -> URLRequest {
         let url = URL(string: API.baseURL + endpoint)!.appendingQueryParameters(["access_token": retrieveAccessToken() ?? ""])
 
         var urlRequest = URLRequest(url: url)
