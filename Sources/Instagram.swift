@@ -47,7 +47,7 @@ public class Instagram {
     /// Returns a shared instance of Instagram.
     public static let shared = Instagram()
 
-    internal init() {
+    public init() {
         if let path = Bundle.main.path(forResource: "Info", ofType: "plist"), let dict = NSDictionary(contentsOfFile: path) as? [String: AnyObject] {
             let clientId = dict["InstagramClientId"] as? String
             let redirectURI = dict["InstagramRedirectURI"] as? String
